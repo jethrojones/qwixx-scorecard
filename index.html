@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qwixx Scorecard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Qwixx Scorecard</h1>
+        
+        <div class="scorecard">
+            <!-- Red Row: 2-12 -->
+            <div class="row red-row">
+                <span class="lock-icon" data-row="red" onclick="toggleLock('red')">🔒</span>
+                <div class="numbers">
+                    <button class="number" data-value="2" onclick="crossNumber('red', 2)">2</button>
+                    <button class="number" data-value="3" onclick="crossNumber('red', 3)">3</button>
+                    <button class="number" data-value="4" onclick="crossNumber('red', 4)">4</button>
+                    <button class="number" data-value="5" onclick="crossNumber('red', 5)">5</button>
+                    <button class="number" data-value="6" onclick="crossNumber('red', 6)">6</button>
+                    <button class="number" data-value="7" onclick="crossNumber('red', 7)">7</button>
+                    <button class="number" data-value="8" onclick="crossNumber('red', 8)">8</button>
+                    <button class="number" data-value="9" onclick="crossNumber('red', 9)">9</button>
+                    <button class="number" data-value="10" onclick="crossNumber('red', 10)">10</button>
+                    <button class="number" data-value="11" onclick="crossNumber('red', 11)">11</button>
+                    <button class="number" data-value="12" onclick="crossNumber('red', 12)">12</button>
+                </div>
+                <span class="color-label">Red</span>
+            </div>
+
+            <!-- Yellow Row: 2-12 -->
+            <div class="row yellow-row">
+                <span class="lock-icon" data-row="yellow" onclick="toggleLock('yellow')">🔒</span>
+                <div class="numbers">
+                    <button class="number" data-value="2" onclick="crossNumber('yellow', 2)">2</button>
+                    <button class="number" data-value="3" onclick="crossNumber('yellow', 3)">3</button>
+                    <button class="number" data-value="4" onclick="crossNumber('yellow', 4)">4</button>
+                    <button class="number" data-value="5" onclick="crossNumber('yellow', 5)">5</button>
+                    <button class="number" data-value="6" onclick="crossNumber('yellow', 6)">6</button>
+                    <button class="number" data-value="7" onclick="crossNumber('yellow', 7)">7</button>
+                    <button class="number" data-value="8" onclick="crossNumber('yellow', 8)">8</button>
+                    <button class="number" data-value="9" onclick="crossNumber('yellow', 9)">9</button>
+                    <button class="number" data-value="10" onclick="crossNumber('yellow', 10)">10</button>
+                    <button class="number" data-value="11" onclick="crossNumber('yellow', 11)">11</button>
+                    <button class="number" data-value="12" onclick="crossNumber('yellow', 12)">12</button>
+                </div>
+                <span class="color-label">Yellow</span>
+            </div>
+
+            <!-- Green Row: 12-2 (descending) -->
+            <div class="row green-row">
+                <span class="color-label">Green</span>
+                <div class="numbers">
+                    <button class="number" data-value="12" onclick="crossNumber('green', 12)">12</button>
+                    <button class="number" data-value="11" onclick="crossNumber('green', 11)">11</button>
+                    <button class="number" data-value="10" onclick="crossNumber('green', 10)">10</button>
+                    <button class="number" data-value="9" onclick="crossNumber('green', 9)">9</button>
+                    <button class="number" data-value="8" onclick="crossNumber('green', 8)">8</button>
+                    <button class="number" data-value="7" onclick="crossNumber('green', 7)">7</button>
+                    <button class="number" data-value="6" onclick="crossNumber('green', 6)">6</button>
+                    <button class="number" data-value="5" onclick="crossNumber('green', 5)">5</button>
+                    <button class="number" data-value="4" onclick="crossNumber('green', 4)">4</button>
+                    <button class="number" data-value="3" onclick="crossNumber('green', 3)">3</button>
+                    <button class="number" data-value="2" onclick="crossNumber('green', 2)">2</button>
+                </div>
+                <span class="lock-icon" data-row="green" onclick="toggleLock('green')">🔒</span>
+            </div>
+
+            <!-- Blue Row: 12-2 (descending) -->
+            <div class="row blue-row">
+                <span class="color-label">Blue</span>
+                <div class="numbers">
+                    <button class="number" data-value="12" onclick="crossNumber('blue', 12)">12</button>
+                    <button class="number" data-value="11" onclick="crossNumber('blue', 11)">11</button>
+                    <button class="number" data-value="10" onclick="crossNumber('blue', 10)">10</button>
+                    <button class="number" data-value="9" onclick="crossNumber('blue', 9)">9</button>
+                    <button class="number" data-value="8" onclick="crossNumber('blue', 8)">8</button>
+                    <button class="number" data-value="7" onclick="crossNumber('blue', 7)">7</button>
+                    <button class="number" data-value="6" onclick="crossNumber('blue', 6)">6</button>
+                    <button class="number" data-value="5" onclick="crossNumber('blue', 5)">5</button>
+                    <button class="number" data-value="4" onclick="crossNumber('blue', 4)">4</button>
+                    <button class="number" data-value="3" onclick="crossNumber('blue', 3)">3</button>
+                    <button class="number" data-value="2" onclick="crossNumber('blue', 2)">2</button>
+                </div>
+                <span class="lock-icon" data-row="blue" onclick="toggleLock('blue')">🔒</span>
+            </div>
+        </div>
+
+        <!-- Penalties -->
+        <div class="penalties">
+            <h3>Penalties</h3>
+            <div class="penalty-boxes">
+                <button class="penalty" onclick="togglePenalty(0)">-5</button>
+                <button class="penalty" onclick="togglePenalty(1)">-5</button>
+                <button class="penalty" onclick="togglePenalty(2)">-5</button>
+                <button class="penalty" onclick="togglePenalty(3)">-5</button>
+            </div>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-section">
+            <h2>Score: <span id="total-score">0</span></h2>
+            <div class="row-scores">
+                <span>Red: <span id="score-red">0</span></span>
+                <span>Yellow: <span id="score-yellow">0</span></span>
+                <span>Green: <span id="score-green">0</span></span>
+                <span>Blue: <span id="score-blue">0</span></span>
+                <span>Penalties: <span id="score-penalties">0</span></span>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button onclick="newGame()" class="btn-new-game">New Game</button>
+            <button onclick="undoLast()" class="btn-undo">Undo Last</button>
+        </div>
+
+        <div class="instructions">
+            <p><strong>How to use:</strong> Click numbers to cross them out. Numbers must be crossed from left to right            in each row. Click 🔒 to lock a row (requires 5+ crosses). Click -5 buttons for penalties.</p>
+            <p><strong>Scoring:</strong> 1 cross = 1 pt, 2 = 3 pts, 3 = 6 pts, 4 = 10 pts, 5 = 15 pts, 6 = 21 pts, 7 = 28 pts, 8 = 36 pts, 9 = 45 pts, 10 = 55 pts, 11 = 66 pts, 12+ = 78+ pts</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

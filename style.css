@@ -1,0 +1,322 @@
+/* Qwixx Scorecard Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    min-height: 100vh;
+    color: #fff;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Scorecard layout */
+.scorecard {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+}
+
+/* Row styling with colors */
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    gap: 15px;
+}
+
+.row:hover {
+    transform: translateX(5px);
+}
+
+/* Color rows with their backgrounds */
+.red-row {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.yellow-row {
+    background: linear-gradient(135deg, #ffd93d 0%, #ffcd38 100%);
+    box-shadow: 0 4px 15px rgba(255, 217, 61, 0.4);
+    color: #1a1a2e;
+}
+
+.green-row {
+    background: linear-gradient(135deg, #6bcb77 0%, #5cb85c 100%);
+    box-shadow: 0 4px 15px rgba(107, 203, 119, 0.4);
+}
+
+.blue-row {
+    background: linear-gradient(135deg, #4dabf7 0%, #339af0 100%);
+    box-shadow: 0 4px 15px rgba(77, 171, 247, 0.4);
+}
+
+/* Lock icon */
+.lock-icon {
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: transform 0.2s, background 0.2s;
+    background: rgba(255,255,255,0.2);
+}
+
+.lock-icon:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.3);
+}
+
+.lock-icon.locked {
+    background: rgba(0,0,0,0.3);
+    text-decoration: line-through;
+}
+
+/* Numbers container */
+.numbers {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+}
+
+/* Number buttons */
+.number {
+    width: 45px;
+    height: 45px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.15);
+    color: inherit;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.number:hover:not(.crossed):not(.disabled) {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+.number.crossed {
+    background: #2d3436;
+    color: #636e72;
+    text-decoration: line-through;
+    border-color: #636e72;
+    cursor: not-allowed;
+}
+
+.number.skipped {
+    position: relative;
+}
+
+.number.skipped::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: #ff7675;
+    transform: rotate(-15deg);
+}
+
+.number.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Color label */
+.color-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Row locked state */
+.row.locked {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Penalties section */
+.penalties {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.penalties h3 {
+    margin-bottom: 15px;
+    color: #ff7675;
+}
+
+.penalty-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.penalty {
+    width: 70px;
+    height: 50px;
+    border: 2px solid #ff7675;
+    border-radius: 10px;
+    background: transparent;
+    color: #ff7675;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.penalty:hover:not(.active) {
+    background: rgba(255, 118, 117, 0.2);
+}
+
+.penalty.active {
+    background: #ff7675;
+    color: #fff;
+    text-decoration: line-through;
+}
+
+/* Score section */
+.score-section {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.score-section h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+#total-score {
+    color: #00d2d3;
+    text-shadow: 0 0 10px rgba(0, 210, 211, 0.5);
+}
+
+.row-scores {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.row-scores span {
+    font-size: 1.1rem;
+}
+
+.row-scores span span {
+    font-weight: bold;
+    color: #00d2d3;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.btn-new-game, .btn-undo {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-new-game {
+    background: linear-gradient(135deg, #00d2d3 0%, #01a3a4 100%);
+    color: #fff;
+}
+
+.btn-new-game:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0, 210, 211, 0.4);
+}
+
+.btn-undo {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.btn-undo:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Instructions */
+.instructions {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.instructions p {
+    margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .numbers {
+        flex-wrap: wrap;
+    }
+    
+    .number {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .row-scores {
+        gap: 15px;
+    }
+}
