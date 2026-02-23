@@ -96,6 +96,12 @@ function toggleLock(row) {
     rowState.locked = !rowState.locked;
     updateDisplay();
     saveState();
+    
+    // Check if game should end
+    const gameEnd = checkGameEnd();
+    if (gameEnd.ended) {
+        setTimeout(() => showGameOver(gameEnd.reason), 500);
+    }
 }
 
 // Toggle penalty
@@ -104,6 +110,12 @@ function togglePenalty(index) {
     state.penalties[index] = !state.penalties[index];
     updateDisplay();
     saveState();
+    
+    // Check if game should end
+    const gameEnd = checkGameEnd();
+    if (gameEnd.ended) {
+        setTimeout(() => showGameOver(gameEnd.reason), 500);
+    }
 }
 
 // Calculate score for a row
@@ -130,7 +142,83 @@ function calculateTotal() {
     const penaltyCount = state.penalties.filter(p => p).length;
     const penaltyScore = penaltyCount * -5;
     
-    return { total, penaltyScore };
+    return { total, penaltyScore, penaltyCount };
+}
+
+// Check if game should end
+function checkGameEnd() {
+    const rows = ['red', 'yellow', 'green', 'blue'];
+    const lockedRows = rows.filter(row => state[row].locked).length;
+    const penaltyCount = state.penalties.filter(p => p).length;
+    
+    // Game ends if: 4 penalties OR 2+ rows locked
+    if (penaltyCount >= 4) {
+        return { ended: true, reason: '4 penalties reached!' };
+    }
+    if (lockedRows >= 2) {
+        return { ended: true, reason: `${lockedRows} rows locked!` };
+    }
+    return { ended: false };
+}
+
+// Show game over modal
+function showGameOver(reason) {
+    const { total } = calculateTotal();
+    
+    // Create modal if doesn't exist
+    let modal = document.getElementById('game-over-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'game-over-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        `;
+        document.body.appendChild(modal);
+    }
+    
+    modal.innerHTML = `
+        <div style="
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            border: 2px solid #00d2d3;
+            box-shadow: 0 0 30px rgba(0, 210, 211, 0.3);
+        ">
+            <h2 style="color: #ff7675; margin-bottom: 20px;">🎲 Game Over!</h2>
+            <p style="color: #fff; margin-bottom: 15px; font-size: 1.2rem;">${reason}</p>
+            <div style="font-size: 3rem; color: #00d2d3; margin: 30px 0; font-weight: bold;">
+                Final Score: ${total}
+            </div>
+            <button onclick="closeGameOver()" style="
+                background: #00d2d3;
+                color: #1a1a2e;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 10px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                cursor: pointer;
+            ">New Game</button>
+        </div>
+    `;
+    modal.style.display = 'flex';
+}
+
+function closeGameOver() {
+    const modal = document.getElementById('game-over-modal');
+    if (modal) modal.style.display = 'none';
+    newGame();
 }
 
 // Update display
